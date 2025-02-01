@@ -16,7 +16,7 @@ def count_characters(book_text):
     
     return character_dict
 
-def print_report(book_text, dict):
+def print_report(text_name, book_text, dict):
     new_list = []
 
     #defines a key that tells .sort() to compare "num" values from the dictionary
@@ -31,7 +31,7 @@ def print_report(book_text, dict):
     #sort using our defined comparison, reverse true so that highest values go first
     new_list.sort(key=sort_by, reverse=True) 
 
-    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"--- Begin report of {text_name} ---")
     print(f"{count_words(book_text)} words found in the document")
     print("")
     
@@ -44,15 +44,15 @@ def print_report(book_text, dict):
 
 
 def main():
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-    
-    word_count = count_characters(file_contents)
-    print_report(file_contents, word_count)
+    text_to_open = input("Enter filepath to text you wish to evaluate: ")
+
+    try:
+        with open(text_to_open) as f:
+            file_contents = f.read()
+            word_count = count_characters(file_contents)
+            print_report(text_to_open, file_contents, word_count)
+    except Exception as e:
+        print(f"Invalid input: {e}")    
             
 
-
-
-
 main()
-
